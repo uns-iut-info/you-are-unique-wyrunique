@@ -1,7 +1,7 @@
-{"producer":{"name":"Blender","version":"2.93.9","exporter_version":"2.93.5","file":"Level1.babylon"},
+{"producer":{"name":"Blender","version":"2.93.9","exporter_version":"2.93.5","file":"Level1_test.babylon"},
 "autoClear":true,"clearColor":[0.0509,0.0509,0.0509],"gravity":[0,-9.81,0],
 "materials":[{"name":"Tutorial_baked","id":"Tutorial_baked","customType":"BABYLON.PBRMaterial","roughness":0.2,"alpha":1,"transparencyMode":0,"alphaCutOff":0.4}],
-"meshes":[{"name":"Tutorial","id":"Tutorial","materialId":"Tutorial_baked","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[1,1.1104,1],"isVisible":true,"isEnabled":true,"checkCollisions":true,"pickable":false
+"meshes":[{"name":"Tutorial","id":"Tutorial","materialId":"Tutorial_baked","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[100,100,100],"isVisible":true,"isEnabled":true,"checkCollisions":true,"pickable":false
 ,"positions":[1.89,1.3405,3.11,0.61,1.3405,5,0.61,1.3405,3.11,-3.11,1.3405,0.61,-5,1.3405,1.89,-5,1.3405,0.61,-0.61,1.3405,-1.89,-1.89,1.3405,-0.61,-1.89,1.3405,-1.89,-0.61,1.3405,3.11,-1.89,1.3405,5,-1.89,1.3405,3.11,-0.61,1.3405,-5,-1.89,1.3405,-3.11,-1.89,1.3405,-5,-3.11,1.3405,-5,-5,1.3405,-3.11
 ,-5,1.3405,-5,-3.11,1.3405,-1.89,-5,1.3405,-0.61,-5,1.3405,-1.89,1.89,1.3405,-5,0.61,1.3405,-3.11,0.61,1.3405,-5,-0.61,1.3405,0.61,-1.89,1.3405,1.89,-1.89,1.3405,0.61,1.89,1.3405,-1.89,0.61,1.3405,-0.61,0.61,1.3405,-1.89,5,1.3405,-5,3.11,1.3405,-3.11,3.11,1.3405,-5,1.89,1.3405,0.61
 ,0.61,1.3405,1.89,0.61,1.3405,0.61,-1.89,1.3405,-3.11,-3.11,0,-3.11,-3.11,1.3405,-3.11,5,1.3405,-1.89,3.11,1.3405,-0.61,3.11,1.3405,-1.89,5,1.3405,0.61,3.11,1.3405,1.89,3.11,1.3405,0.61,5,1.3405,3.11,3.11,1.3405,5,3.11,1.3405,3.11,-1.89,0,-1.89,-3.11,0,-3.11,-1.89,0,-3.11
@@ -88,5 +88,5 @@
 ,429,228,266,430,231,269,431,432,272,170,169,274,164,163,276]
 ,"subMeshes":[{"materialIndex":0,"verticesStart":0,"verticesCount":433,"indexStart":0,"indexCount":678}]
 ,"instances":[]}
-]
+,{"name":"Player","id":"Player","position":[0,2.6359,0],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true},{"name":"Part1","id":"Part1","position":[250,2.6359,250],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true},{"name":"Part2","id":"Part2","position":[250,2.6359,-250],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true},{"name":"Part3","id":"Part3","position":[-250,2.6359,250],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true},{"name":"Part4","id":"Part4","position":[-250,2.6359,-250],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":false,"isEnabled":true}]
 }

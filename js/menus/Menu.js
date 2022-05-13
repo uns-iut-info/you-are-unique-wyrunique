@@ -256,5 +256,16 @@ export default class Menu extends BABYLON.Scene{
             console.log("explication to main menu");
         })
     }
+
+    async createGuiCinematicMenu(){
+        this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("guiCinematicMenu", true, this);
+        let loadedGui = await this.advancedTexture.parseFromURLAsync("gui/guiTextureCinematic.json");
+        this.advancedTexture.skipButton = this.advancedTexture.getControlByName("skipButton");
+
+        this.advancedTexture.skipButton.onPointerUpObservable.add(function(){
+            GameState.GameState = GameState.MainMenu;
+            console.log("cinematic to main menu");
+        })
+    }
 }
 

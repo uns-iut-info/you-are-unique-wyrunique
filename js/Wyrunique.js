@@ -53,7 +53,9 @@ function startGame(){
                     else{
                         scene.advancedTexture.dispose();
                     }
+                    scene.createGuiCinematicMenu().then(r => true);
                     GameState.precGameState = GameState.CinematicMenu;
+                    console.log(scene)
                 break;
                 case GameState.TextMenu:
                     if (GameState.precGameState === GameState.Level || GameState.precGameState === GameState.Congratulation){
@@ -72,6 +74,9 @@ function startGame(){
                         scene = new Menu(engine, canvas, false);
                     }
                     else{
+                        if (GameState.precGameState === GameState.CinematicMenu){
+                            scene.bigBall.dispose();
+                        }
                         scene.advancedTexture.dispose();
                     }
                     scene.createGuiMainMenu().then(r => true);
@@ -119,12 +124,12 @@ function startGame(){
                     switch (GameState.numLevel){
                         case 0:
                             scene.dispose();
-                            scene = new Level1(engine, canvas, 0);
+                            scene = new Level1(engine, canvas, 1);
                             GameState.precGameState = GameState.Level;
                         break;
                         case 1:
                             scene.dispose();
-                            scene = new Level2(engine, canvas, 1);
+                            scene = new Level2(engine, canvas, 2);
                             GameState.precGameState = GameState.Level;
                         break;
                     }
@@ -205,10 +210,10 @@ function startGame(){
 
                 switch (GameState.numLevel){
                     case 0:
-                        scene = new Level1(engine, canvas, 0);
+                        scene = new Level1(engine, canvas, 1);
                     break;
                     case 1:
-                        scene = new Level2(engine, canvas, 1);
+                        scene = new Level2(engine, canvas, 2);
                     break;
                 }
 

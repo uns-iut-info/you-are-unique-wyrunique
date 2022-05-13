@@ -19,6 +19,8 @@ export default class AbstractLevel extends BABYLON.Scene{
         this.canFinish = false;
         this.endPosition = new BABYLON.Vector3(0, 15, 0);
 
+        this.activeCamera = this.createFreeCamera(this); //Default camera until the rest of the scene is loaded with the cameras
+
         let finished = this.createAdvancedTexture("gui/guiTextureLevel.json", "guiLevel");
 
         this.effectSoundTrack = new BABYLON.SoundTrack(this);
@@ -65,8 +67,52 @@ export default class AbstractLevel extends BABYLON.Scene{
 
     }
 
+    buildWalls(lvlID) {
+        let labTask = this.assetsManager.addMeshTask("maze task", "", "assets/", "Level" + lvlID + ".babylon");
+        labTask.onSuccess = (task) => {
 
-    createSphere(name, nb, pos_y, pos_x, pos_z, diffuseColor){
+            //Load the maze itself with the texture
+            let mazeMesh = task.loadedMeshes[0];
+            mazeMesh.material.diffuseTexture = new BABYLON.Texture("images/Level" + lvlID + "_color.png", this.scene);
+            mazeMesh.material.bumpTexture = new BABYLON.Texture("images/Level" + lvlID + "_normal.png");
+
+            mazeMesh.position = new BABYLON.Vector3.Zero();
+
+            mazeMesh.physicsImpostor = new BABYLON.PhysicsImpostor(mazeMesh,
+                BABYLON.PhysicsImpostor.MeshImpostor, {mass: 0});
+
+            //Create the player's mesh based on the position of an invisible mesh created in Blender
+            let playerSpawnMesh = task.loadedMeshes.find(function (mesh) {
+                return mesh.name === "Player";
+            });
+            this.createSphere(playerSpawnMesh.name, 0, playerSpawnMesh.position.x, playerSpawnMesh.position.y, playerSpawnMesh.position.z);
+
+            //Repeat this operation for every other sphere
+            for (let i = 1; i <= task.loadedMeshes.length-2; i++) {
+                let partSpawnMesh = task.loadedMeshes.find(function (mesh) {
+                    return mesh.name === "Part"+i;
+                });
+
+                if (partSpawnMesh !== undefined) {
+                    this.createSphere(partSpawnMesh.name, i, partSpawnMesh.position.x, partSpawnMesh.position.y, partSpawnMesh.position.z);
+                }
+            }
+
+            //Set the camera to the second created one which is the player's
+            this.activeCamera = this.cameras[1];
+            //And remove the free camera that was created to let the scene renders
+            this.cameras.shift();
+        }
+
+        labTask.onError = function (task, message, exception) {
+            console.log(message, exception);
+        }
+        this.assetsManager.load();
+
+    }
+
+
+    createSphere(name, nb, pos_x, pos_y, pos_z){
         let sphereMesh = new BABYLON.MeshBuilder.CreateSphere(name, {diameter: 5}, this);
 
         sphereMesh.position.y = pos_y;
@@ -89,29 +135,6 @@ export default class AbstractLevel extends BABYLON.Scene{
         let followCamera = this.createFollowCamera(this, sphereMesh);
 
         sphereMesh.showBoundingBox = false;
-    }
-
-    buildWalls(lvlID) {
-        let labTask = this.assetsManager.addMeshTask("maze task", "", "assets/", "Level" + lvlID + ".babylon");
-        labTask.onSuccess = function (task) {
-
-            let mazeMesh = task.loadedMeshes[0];
-            //let mazeMaterial = new BABYLON.StandardMaterial("mazeMaterial", this.scene);
-            mazeMesh.material.diffuseTexture = new BABYLON.Texture("images/Level" + lvlID + "_color.png", this.scene);
-            mazeMesh.material.bumpTexture = new BABYLON.Texture("images/Level" + lvlID + "_normal.png");
-            //mazeMesh.material = mazeMaterial;
-
-            mazeMesh.position = new BABYLON.Vector3.Zero();
-            mazeMesh.scaling = new BABYLON.Vector3(100, 100, 100);
-
-            mazeMesh.physicsImpostor = new BABYLON.PhysicsImpostor(mazeMesh,
-                BABYLON.PhysicsImpostor.MeshImpostor, {mass: 0});
-        }
-        labTask.onError = function (task, message, exception) {
-            console.log(message, exception);
-
-        }
-        this.assetsManager.load();
     }
 
     createLights() {
@@ -166,11 +189,32 @@ export default class AbstractLevel extends BABYLON.Scene{
         }
     }
 
-
     changePlayer(){
         this.currentPlayer = (this.currentPlayer + 1) % this.players.length;
         console.log("Switching to player/camera " + this.currentPlayer);
         this.activeCamera = this.cameras[this.currentPlayer];
         return true;
+    }
+
+    createFreeCamera(scene) {
+        let camera = new BABYLON.FreeCamera("freeCamera", new BABYLON.Vector3(0, 50, 0), scene);
+        camera.attachControl(this.canvas);
+        // prevent camera to cross ground
+        camera.checkCollisions = true;
+        // avoid flying with the camera
+        camera.applyGravity = true;
+
+        // Add extra keys for camera movements
+        // Need the ascii code of the extra key(s). We use a string method here to get the ascii code
+        camera.keysUp.push('z'.charCodeAt(0));
+        camera.keysDown.push('s'.charCodeAt(0));
+        camera.keysLeft.push('q'.charCodeAt(0));
+        camera.keysRight.push('d'.charCodeAt(0));
+        camera.keysUp.push('Z'.charCodeAt(0));
+        camera.keysDown.push('S'.charCodeAt(0));
+        camera.keysLeft.push('Q'.charCodeAt(0));
+        camera.keysRight.push('D'.charCodeAt(0));
+
+        return camera;
     }
 }
