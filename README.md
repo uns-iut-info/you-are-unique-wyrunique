@@ -6,8 +6,8 @@
  > - Yann Brault
 
 ## Installation
-Clone the repository.
+Cloner le dépôt.
 
-Install npm.
+Installer npm.
 
-In the directory install the needed dependencies: **npm install --save**
+Dans le répertoire du projet, installer les dépendances nécessaire avec la commande: **npm install --save**
