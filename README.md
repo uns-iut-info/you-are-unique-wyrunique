@@ -2,6 +2,8 @@
 
 [Accéder au jeu]()
 
+[Vidéo de démonstration](/public/D%C3%A9mo%20jeu.mp4)
+
 > Jeu produit par les membres de l'équipe **Wyruniqe**
 
 > Ce jeu a été développé dans le cadre du concours **Games On Web 2022** organisé par [**CGi**](https://www.cgi.com/france/fr-fr/event/games-on-web-2022).
@@ -57,53 +59,53 @@ Le processus de réalisation du jeu a été composé de plusieurs étapes.
 
 - Dans une démarche d'apprentissage l'un de nos membres a réalisé cette très belle imitation d'un pokémon qui lui a permis malgré tout d'apprendre à maîtriser un peu les différents types de *mesh*, les dimensions, les positions et d'autres éléments très utiles.
 
-![Découverte de BabylonJS](/images/readme/pr%C3%A9mice.png)
+![Découverte de BabylonJS](/public/images/readme/pr%C3%A9mice.png)
 
 - Donc, une fois le développement du jeu lancé il nous fallait établir une version très minimale de ce qu'on voulait.  
 C'est-à-dire, une boule sur un plateau qui peut évoluer entre des murs.  
 Il a donc fallu établir toute la *scene*, les différents *mesh*, assigner des *bindings* afin de pouvoir déplacer la boule et nous avons également utilisé le moteur physique *cannon.js* afin de gérer toutes les relations physiques et collisions entre la boule et les murs.  
 Voici un petit aperçu.  
 
-![Première version](/images/readme/avant-blender1.png)  
+![Première version](/public/images/readme/avant-blender1.png)  
 
-![Première version](/images/readme/avant-blender2.png)
+![Première version](/public/images/readme/avant-blender2.png)
 
 > Ici, il s'agit d'une version un peu plus avancée car on y retrouve le nuage de particule qui sert d'indicateur pour le portail de sortie du labyrinthe. 
 
 - Nous avons pendant un temps pensé à utiliser une texture de miroir sur les murs du labyrinthe mais l'idée n'a pas été conservée.
 
-![miroir](/images/readme/miroir.png)  
+![miroir](/public/images/readme/miroir.png)  
 
 
 - Une fois cette première version faite, il nous a paru naturel d'attaquer le vif du sujet, la labyrinthe.  
 Nous avons d'abord pensé à utiliser un algorithme pour générer de manière aléatoire un labyrinthe puis ensuite de le modéliser à l'aide de bloc, mais cette solution ne nous paraissant pas la plus simple, nous avons décidé de le modéliser à l'aide du logiciel **Blender**.
 
-![modélisation](/images/readme/blender.png)  
+![modélisation](/public/images/readme/blender.png)  
 
 > On a ici une vue supérieure de la modélisation d'un de nos niveaux.
 
 - Après que les labyrinthe aient été réalisés, nous les avons intégrés à notre code, et nous leur avons assignés des textures, ce qui a donné lieux à quelques mésaventures et tests.
 
-![problème de taille](/images/readme/scaling.png)  
+![problème de taille](/public/images/readme/scaling.png)  
 
-![mauvaise texture](/images/readme/floor-is-lava.png)  
+![mauvaise texture](/public/images/readme/floor-is-lava.png)  
 
 - En parallèle de la création des labyrinthes, une interface graphique a été développée afin de rendre plus agréable et intuitive l'expérience de jeu.  
 L'interface est sobre et simple, composée de boutons nous permettant de sélectionner des niveaux, connaître les commandes ou tout simplement de jouer.
 
-![page de démarrage](/images/readme/d%C3%A9marrage.png)  
+![page de démarrage](/public/images/readme/d%C3%A9marrage.png)  
 
-![menu](/images/readme/menu.png)  
+![menu](/public/images/readme/menu.png)  
 
 - Enfin, des pièges et mécanismes ont été ajoutés des les différents niveaux afin de compléxifier et rendre plus intéressante l'expérience de jeu pour le joueur.  
 
-![bouton](/images/readme/bouton.png)  
+![bouton](/public/images/readme/bouton.png)  
 
-![trappe](/images/readme/pi%C3%A8ge.jpg)  
+![trappe](/public/images/readme/pi%C3%A8ge.jpg)  
 
 - Finalement voici à quoi ressemble le jeu actuellement:
 
-![jeu](/images/readme/jeu.png)  
+![jeu](/public/images/readme/jeu.png)  
 
 
 ## Installation
