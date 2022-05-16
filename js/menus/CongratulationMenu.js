@@ -37,7 +37,6 @@ export default class CongratulationMenu extends BABYLON.Scene{
         this.restartLevelButton = this.advancedTexture.getControlByName("restartLevelButton");
         this.returnMenuButton = this.advancedTexture.getControlByName("returnMenuButton");
 
-
         this.nextLevelButton.onPointerUpObservable.add(function (){
             GameState.numLevel = (GameState.numLevel +1);
             if (GameState.numLevel < GameState.maxNumLevel){
@@ -61,7 +60,6 @@ export default class CongratulationMenu extends BABYLON.Scene{
 
     }
 
-    // ne se dispose pas
     fallingBalls(){
         BABYLON.setAndStartTimer({
             timeout:5,

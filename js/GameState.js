@@ -12,7 +12,7 @@ export default class GameState{
 
     static precGameState = this.StartMenu;
     static GameState = this.StartMenu;
-    static numLevel = 0;
+    static numLevel = 1;
     static restartLevel = false;
     static maxNumLevel = 2;
 }

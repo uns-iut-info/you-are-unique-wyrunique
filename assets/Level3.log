@@ -1,0 +1,161 @@
+Exporter version: 2.93.5, Blender version: 2.93.9
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used :
+		Inline textures     :  false
+		Material Type       :  PBR
+		Positions Precision :  4
+		Normals Precision   :  3
+		UVs Precision       :  3
+		Vert Color Precision:  3
+		Mat Weight Precision:  2
+		Keep Z-up r-handed  :  no
+		Texture directory   :  C:\Users\Raphael\Documents\Fac\Web Game\Wyrunique\assets\
+	Python World class constructor completed
+	WARNING: No active camera has been assigned, or is not in a currently enabled collection
+	processing begun of mesh:  Labyrinthe
+		processing begun of material:  Material.002
+			WARNING: unsupported node type(ShaderNodeGroup) will trigger baking
+			bake time:  0 min, 0.0793 secs
+		num positions      :  1442
+		num normals        :  1442
+		num tangents       :  0
+		num uvs            :  2884
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  988
+		WARNING: # of 0 area faces found:  56
+	processing begun of mesh:  Porte1
+		WARNING: No materials have been assigned: 
+		num positions      :  148
+		num normals        :  148
+		num tangents       :  0
+		num uvs            :  296
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  60
+	processing begun of mesh:  Trou_Porte
+		WARNING: No materials have been assigned: 
+		num positions      :  242
+		num normals        :  242
+		num tangents       :  0
+		num uvs            :  484
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  88
+	processing begun of mesh:  PlateformeSaut1
+		processing begun of material:  UnbrokenMaterial
+			WARNING: unsupported node type(ShaderNodeTexMusgrave) will trigger baking
+			WARNING: unsupported node type(ShaderNodeTexNoise) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeMixRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			Baking texture, type: DIFFUSE, mapped using: UVMap
+			processing texture PlateformeSaut1_baked_DIFFUSE
+				texture type:  diffuseTexture, mapped using: "UVMap"
+			Diffuse / albeto channel baked
+			bake time:  0 min, 1.6183 secs
+		num positions      :  29
+		num normals        :  29
+		num tangents       :  0
+		num uvs            :  58
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  12
+	processing begun of mesh:  PlateformeSaut2
+		processing begun of material:  UnbrokenMaterial
+			WARNING: unsupported node type(ShaderNodeTexMusgrave) will trigger baking
+			WARNING: unsupported node type(ShaderNodeTexNoise) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeMixRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			Baking texture, type: DIFFUSE, mapped using: UVMap
+			processing texture PlateformeSaut2_baked_DIFFUSE
+				texture type:  diffuseTexture, mapped using: "UVMap"
+			Diffuse / albeto channel baked
+			bake time:  0 min, 1.2488 secs
+		num positions      :  29
+		num normals        :  29
+		num tangents       :  0
+		num uvs            :  58
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  12
+	processing begun of mesh:  PlateformeSaut3
+		processing begun of material:  UnbrokenMaterial
+			WARNING: unsupported node type(ShaderNodeTexMusgrave) will trigger baking
+			WARNING: unsupported node type(ShaderNodeTexNoise) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeMixRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			Baking texture, type: DIFFUSE, mapped using: UVMap
+			processing texture PlateformeSaut3_baked_DIFFUSE
+				texture type:  diffuseTexture, mapped using: "UVMap"
+			Diffuse / albeto channel baked
+			bake time:  0 min, 1.8697 secs
+		num positions      :  29
+		num normals        :  29
+		num tangents       :  0
+		num uvs            :  58
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  12
+	processing begun of node:  Jump1
+	processing begun of node:  Jump2
+	processing begun of node:  Jump3
+	processing begun of node:  Button1
+	processing begun of node:  Part1
+	processing begun of node:  Part2
+	processing begun of node:  Player
+	processing begun of mesh:  PiegePics
+		processing begun of material:  Material.003
+			WARNING: unsupported node type(ShaderNodeGroup) will trigger baking
+			bake time:  0 min, 0.032 secs
+		num positions      :  17898
+		num normals        :  17898
+		num tangents       :  0
+		num uvs            :  35796
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  10478
+	processing begun of mesh:  PlateformePics
+		processing begun of material:  UnbrokenMaterial
+			WARNING: unsupported node type(ShaderNodeTexMusgrave) will trigger baking
+			WARNING: unsupported node type(ShaderNodeTexNoise) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeMixRGB) will trigger baking
+			WARNING: unsupported node type(ShaderNodeValToRGB) will trigger baking
+			Baking texture, type: DIFFUSE, mapped using: UVMap
+			processing texture PlateformePics_baked_DIFFUSE
+				texture type:  diffuseTexture, mapped using: "UVMap"
+			Diffuse / albeto channel baked
+			bake time:  0 min, 1.874 secs
+		num positions      :  29
+		num normals        :  29
+		num tangents       :  0
+		num uvs            :  58
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  12
+	processing begun of node:  TriggerPlateforme
+	processing begun of mesh:  PieceManquante
+		WARNING: No materials have been assigned: 
+		num positions      :  588
+		num normals        :  588
+		num tangents       :  0
+		num uvs            :  1176
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  960
+========= Writing of JSON file started =========
+	writing mesh:  Labyrinthe
+	writing mesh:  Porte1
+	writing mesh:  Trou_Porte
+	writing mesh:  PlateformeSaut1
+	writing mesh:  PlateformeSaut2
+	writing mesh:  PlateformeSaut3
+	writing mesh:  PiegePics
+	writing mesh:  PlateformePics
+	writing mesh:  PieceManquante
+========= Writing of JSON file completed =========
+========= end of processing =========
+elapsed time:  0 min, 7.9614 secs

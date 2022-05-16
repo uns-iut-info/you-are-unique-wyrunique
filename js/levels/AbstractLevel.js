@@ -11,74 +11,103 @@ export default class AbstractLevel extends BABYLON.Scene{
             throw new TypeError('Abstract class "AbstractMenu" cannot be instanciated directly');
         }
 
+        this.createLoadingOpen()
+
         this.id = id;
         this.name = null;
         this.players = [];
         this.cameras = [];
+        this.doors = [];
         this.currentPlayer = 0;
         this.canFinish = false;
-        this.endPosition = new BABYLON.Vector3(0, 15, 0);
-
+        this.endPosition = new BABYLON.Vector3(0,0,0);
         this.activeCamera = this.createFreeCamera(this); //Default camera until the rest of the scene is loaded with the cameras
 
-        let finished = this.createAdvancedTexture("gui/guiTextureLevel.json", "guiLevel");
+        this.createScene(engine, id);
 
+        // Music
         this.effectSoundTrack = new BABYLON.SoundTrack(this);
+        this.effectButtonSoundTrack = new BABYLON.SoundTrack(this);
+        this.effectDoorSoundTrack = new BABYLON.SoundTrack(this);
+        this.effectHoleSoundTrack = new BABYLON.SoundTrack(this);
+        this.addMusic();
+        this.addSoundEffect();
 
-        let music = new BABYLON.Sound("menuMusic", "musics/Funambule1.mp3", this, null,
+    }
+
+    createScene(engine, id){
+        this.clearColor = new BABYLON.Color3(0, 0, 0);
+
+        let gravityVector = new BABYLON.Vector3(0,-29.81, 0);
+        let physicsPlugin = new BABYLON.CannonJSPlugin();
+        this.enablePhysics(gravityVector, physicsPlugin);
+        this.assetsManager = new BABYLON.AssetsManager(this);
+
+        this.createLights();
+        this.buildWalls(engine, id);
+    }
+
+    addMusic(){
+        this.music = new BABYLON.Sound("menuMusic", "musics/Funambule1.mp3", this, null,
             {
                 loop: true,
                 autoplay:true,
                 volume: Options.levelMusic
             });
-
+    }
+    addSoundEffect(){
         this.mergeSound = new BABYLON.Sound("mergeSound",
             "musics/mixkit-fast-small-sweep-transition-166.wav",
             this,
-        null,
+            null,
             {
                 volume: Options.levelSoundEffect
             }
-            );
+        );
         this.effectSoundTrack.addSound(this.mergeSound);
+
+        this.buttonSound = new BABYLON.Sound("buttonSound",
+            "musics/buttonSound.mp3",
+            this,
+            null,
+            {
+                volume: (Options.levelSoundEffect-0.5)%2
+            }
+            );
+        this.effectButtonSoundTrack.addSound(this.buttonSound);
+
+        this.doorSound = new BABYLON.Sound("doorSound",
+            "musics/door/scary_wooden_door.wav",
+            this,
+            null,
+            {
+                volume: (Options.levelSoundEffect -0.8)%2
+            });
+        this.effectDoorSoundTrack.addSound(this.doorSound);
+
+        this.holeSound = new BABYLON.Sound("holeSound",
+            "musics/ball_hole_sound.mp3",
+            this,
+            null,
+            {
+                volume: Options.levelSoundEffect
+            });
+        this.effectHoleSoundTrack.addSound(this.holeSound);
     }
 
-    async createAdvancedTexture(path, name){
-        this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(name, true, this);
-        let loadedGui = await this.advancedTexture.parseFromURLAsync(path);
-
-
-        this.quitButton = this.advancedTexture.getControlByName("quitButton");
-        this.restartButton = this.advancedTexture.getControlByName("restartButton");
-
-        if (name === "guiLevel"){
-            this.nbBallText = this.advancedTexture.getControlByName("textNbBall");
-            this.nbBallText.text = this.players.length;
-        }
-
-        this.quitButton.onPointerUpObservable.add(function (){
-            GameState.GameState = GameState.LevelMenu;
-            console.log("level to level menu");
-        })
-        this.restartButton.onPointerUpObservable.add(function (){
-            GameState.restartLevel = true;
-            console.log("restart level");
-        })
-
-    }
-
-    buildWalls(lvlID) {
+    buildWalls(engine, lvlID) {
         let labTask = this.assetsManager.addMeshTask("maze task", "", "assets/", "Level" + lvlID + ".babylon");
         labTask.onSuccess = (task) => {
-
             //Load the maze itself with the texture
-            let mazeMesh = task.loadedMeshes[0];
-            mazeMesh.material.diffuseTexture = new BABYLON.Texture("images/Level" + lvlID + "_color.png", this.scene);
-            mazeMesh.material.bumpTexture = new BABYLON.Texture("images/Level" + lvlID + "_normal.png");
+            this.mazeMesh = task.loadedMeshes.find(function (mesh) {
+                return mesh.name === "Labyrinthe";
+            });
+            this.mazeMesh.material.diffuseTexture = new BABYLON.Texture("images/Level"+ lvlID +"/Level" + lvlID + "_color.png", this.scene);
+            this.mazeMesh.material.bumpTexture = new BABYLON.Texture("images/Level"+ lvlID +"/Level" + lvlID + "_normal.png");
 
-            mazeMesh.position = new BABYLON.Vector3.Zero();
+            this.mazeMesh.position = new BABYLON.Vector3.Zero();
 
-            mazeMesh.physicsImpostor = new BABYLON.PhysicsImpostor(mazeMesh,
+            this.mazeMesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.mazeMesh,
                 BABYLON.PhysicsImpostor.MeshImpostor, {mass: 0});
 
             //Create the player's mesh based on the position of an invisible mesh created in Blender
@@ -102,6 +131,11 @@ export default class AbstractLevel extends BABYLON.Scene{
             this.activeCamera = this.cameras[1];
             //And remove the free camera that was created to let the scene renders
             this.cameras.shift();
+
+            this.setButtonAndDoor();
+            this.loadSpecificObjects();
+
+            let finished = this.createAdvancedTexture("gui/guiTextureLevel.json", "guiLevel");
         }
 
         labTask.onError = function (task, message, exception) {
@@ -111,6 +145,102 @@ export default class AbstractLevel extends BABYLON.Scene{
 
     }
 
+    loadSpecificObjects() {
+        console.log("Nothing to load.")
+    }
+
+    setButtonAndDoor(){
+        console.log("No door to load.");
+    }
+
+    async createAdvancedTexture(path, name){
+        this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(name, true, this);
+        let loadedGui = await this.advancedTexture.parseFromURLAsync(path);
+
+        this.quitButton = this.advancedTexture.getControlByName("quitButton");
+        this.restartButton = this.advancedTexture.getControlByName("restartButton");
+
+        this.advancedTexture.getControlByName("globalGrid").isPointerBlocker = false;
+        this.advancedTexture.getControlByName("upGrid").isPointerBlocker = false;
+
+        if (name === "guiLevel"){
+            this.advancedTexture.getControlByName("remainingBallGrid").isPointerBlocker = false;
+            this.nbBallText = this.advancedTexture.getControlByName("textNbBall");
+            this.nbBallText.text = this.players.length;
+        }
+
+        this.quitButton.onPointerUpObservable.add(function (){
+            GameState.GameState = GameState.LevelMenu;
+            console.log("level to level menu");
+        })
+        this.restartButton.onPointerUpObservable.add(function (){
+            GameState.restartLevel = true;
+            console.log("restart level");
+        })
+    }
+
+    createButtonMesh(position, name){
+        let button = BABYLON.MeshBuilder.CreateBox(name,
+            {
+                height: 3,
+                width: 20,
+                depth: 20,
+                updatable: true
+            });
+        button.position = position;
+
+        let outButton = BABYLON.MeshBuilder.CreateBox("ext"+name,
+            {
+                height: 2.9,
+                width: 23,
+                depth: 23,
+                updatable:true
+            });
+        outButton.position = position;
+
+        let csgButton = BABYLON.CSG.FromMesh(button);
+        let csgOutButton = BABYLON.CSG.FromMesh(outButton);
+        let csgExtButton = csgOutButton.subtract(csgButton)
+
+        let extButton = csgExtButton.toMesh("extButton"+name, null, this);
+        extButton.position = position;
+
+        outButton.dispose();
+        this.removeMesh(outButton);
+
+
+        let buttonMaterial = new BABYLON.StandardMaterial(name+"Material", this);
+        buttonMaterial.diffuseTexture = new BABYLON.Texture("images/Common/buttonTexture.jpg", this);
+        buttonMaterial.diffuseColor = new BABYLON.Color3(1,0.5,0);
+        button.material = buttonMaterial;
+
+        let extButtonMaterial = new BABYLON.StandardMaterial("ext"+name+"Material", this);
+        extButtonMaterial.diffuseColor = new BABYLON.Color3(0.2,0.2,0.2);
+        extButton.material = extButtonMaterial;
+
+        button.physicsImpostor = new BABYLON.PhysicsImpostor(button,
+            BABYLON.PhysicsImpostor.BoxImpostor, {
+                ignoreParent: true
+            }, this);
+
+        extButton.physicsImpostor = new BABYLON.PhysicsImpostor(extButton,
+            BABYLON.PhysicsImpostor.MeshImpostor, {
+                ignoreParent: true
+            }, this);
+
+        return button;
+    }
+    createPlateformJumpMesh(position, name){
+        let abstractPlane = BABYLON.Plane.FromPositionAndNormal(position, new BABYLON.Vector3(0,1,0));
+        let plane = BABYLON.MeshBuilder.CreatePlane("plane", {
+            size:15,
+            sourcePlane:abstractPlane,
+            sideOrientation:BABYLON.Mesh.DOUBLESIDE
+        })
+        plane.position = position;
+
+        return plane;
+    }
 
     createSphere(name, nb, pos_x, pos_y, pos_z){
         let sphereMesh = new BABYLON.MeshBuilder.CreateSphere(name, {diameter: 5}, this);
@@ -121,7 +251,7 @@ export default class AbstractLevel extends BABYLON.Scene{
         sphereMesh.frontVector = new BABYLON.Vector3(0, 0, 1);
 
         let sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", this);
-        sphereMaterial.diffuseTexture = new BABYLON.Texture("images/Ball.jpg", this);
+        sphereMaterial.diffuseTexture = new BABYLON.Texture("images/Common/Ball.jpg", this);
         sphereMesh.material = sphereMaterial;
 
         sphereMesh.physicsImpostor = new BABYLON.PhysicsImpostor(sphereMesh,
@@ -141,8 +271,6 @@ export default class AbstractLevel extends BABYLON.Scene{
         // i.e sun light with all light rays parallels, the vector is the direction.
         let light0 = new BABYLON.HemisphericLight("dir0", new BABYLON.Vector3(1, 0, 0), this);
         let light1 = new BABYLON.HemisphericLight("dir0", new BABYLON.Vector3(-1, 0, 0), this);
-        // light0.position.y = 100;
-
     }
 
     createFollowCamera(scene, target) {
@@ -155,14 +283,20 @@ export default class AbstractLevel extends BABYLON.Scene{
 
         camera.checkCollisions = true;
         camera.panningAxis = new BABYLON.Vector3(0, 0, 0);
-        camera.lockedTarget = target;
+        camera.setTarget(target);
         camera.cameraAcceleration = 0.1; // how fast to move
         camera.maxCameraSpeed = 5; // speed limit
         camera.lowerRadiusLimit = 30;
         camera.upperRadiusLimit = 100;
         camera.upperBetaLimit = (Math.PI / 2);
-        camera.attachControl(this.canvas, false, false, 0);
 
+        // vitesse de déplacement de la caméra
+        camera.inertia = 0.3;
+        camera.inertialAlphaOffset = 10; // droite gauche
+        camera.inertialBetaOffset = 10; // haut bas
+        camera.inertialRadiusOffset = 10; // zoom
+
+        camera.attachControl(this.canvas, true);
         return camera;
     }
 
@@ -170,7 +304,7 @@ export default class AbstractLevel extends BABYLON.Scene{
         if (!this.canFinish) {
 
             this.particleSystem = new BABYLON.ParticleSystem("particles", 500, this); // on construction
-            this.particleSystem.particleTexture = new BABYLON.Texture("images/Particle.jpg", this);
+            this.particleSystem.particleTexture = new BABYLON.Texture("images/Common/Particle.jpg", this);
             this.particleSystem.emitter = position;
             this.particleSystem.emitRate = 200;
 
@@ -216,5 +350,39 @@ export default class AbstractLevel extends BABYLON.Scene{
         camera.keysRight.push('D'.charCodeAt(0));
 
         return camera;
+    }
+
+
+    createLoadingOpen(){
+        this.loadingAdvancedTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("loadingTexture", this);
+
+        let perc = 0;
+        this.loadingAdvancedTexture.ellipses = [];
+        for (let i=0; i< 35; i++){
+            let r = this.createEllipse(perc, perc, 100, this.loadingAdvancedTexture);
+            this.loadingAdvancedTexture.ellipses.push(r);
+            perc += 30+i*2;
+        }
+
+        let i= 0;
+        this.interval = setInterval( () => {
+            this.loadingAdvancedTexture.ellipses[i].alpha = 0;
+            i++;
+            if (i === 35){
+                this.loadingAdvancedTexture.dispose();
+                clearInterval(this.interval);
+            }
+        }, 10);
+    }
+
+    createEllipse( width, height, thickness, advancedTexture){
+        let ellipse = new BABYLON.GUI.Ellipse();
+        ellipse.width = width+"px";
+        ellipse.height = height+"px";
+        ellipse.color = "black";
+        ellipse.background = "transparent";
+        ellipse.thickness = thickness;
+        advancedTexture.addControl(ellipse);
+        return ellipse;
     }
 }

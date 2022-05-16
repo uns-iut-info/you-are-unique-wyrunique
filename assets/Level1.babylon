@@ -1,7 +1,7 @@
-{"producer":{"name":"Blender","version":"2.93.9","exporter_version":"2.93.5","file":"Level1_test.babylon"},
+{"producer":{"name":"Blender","version":"2.93.9","exporter_version":"2.93.5","file":"Level1.babylon"},
 "autoClear":true,"clearColor":[0.0509,0.0509,0.0509],"gravity":[0,-9.81,0],
-"materials":[{"name":"Tutorial_baked","id":"Tutorial_baked","customType":"BABYLON.PBRMaterial","roughness":0.2,"alpha":1,"transparencyMode":0,"alphaCutOff":0.4}],
-"meshes":[{"name":"Tutorial","id":"Tutorial","materialId":"Tutorial_baked","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[100,100,100],"isVisible":true,"isEnabled":true,"checkCollisions":true,"pickable":false
+"materials":[{"name":"Labyrinthe_baked","id":"Labyrinthe_baked","customType":"BABYLON.PBRMaterial","roughness":0.2,"alpha":1,"transparencyMode":0,"alphaCutOff":0.4}],
+"meshes":[{"name":"Labyrinthe","id":"Labyrinthe","materialId":"Labyrinthe_baked","billboardMode":0,"position":[0,0,0],"rotation":[0,0,0],"scaling":[100,100,100],"isVisible":true,"isEnabled":true,"checkCollisions":true,"pickable":false
 ,"positions":[1.89,1.3405,3.11,0.61,1.3405,5,0.61,1.3405,3.11,-3.11,1.3405,0.61,-5,1.3405,1.89,-5,1.3405,0.61,-0.61,1.3405,-1.89,-1.89,1.3405,-0.61,-1.89,1.3405,-1.89,-0.61,1.3405,3.11,-1.89,1.3405,5,-1.89,1.3405,3.11,-0.61,1.3405,-5,-1.89,1.3405,-3.11,-1.89,1.3405,-5,-3.11,1.3405,-5,-5,1.3405,-3.11
 ,-5,1.3405,-5,-3.11,1.3405,-1.89,-5,1.3405,-0.61,-5,1.3405,-1.89,1.89,1.3405,-5,0.61,1.3405,-3.11,0.61,1.3405,-5,-0.61,1.3405,0.61,-1.89,1.3405,1.89,-1.89,1.3405,0.61,1.89,1.3405,-1.89,0.61,1.3405,-0.61,0.61,1.3405,-1.89,5,1.3405,-5,3.11,1.3405,-3.11,3.11,1.3405,-5,1.89,1.3405,0.61
 ,0.61,1.3405,1.89,0.61,1.3405,0.61,-1.89,1.3405,-3.11,-3.11,0,-3.11,-3.11,1.3405,-3.11,5,1.3405,-1.89,3.11,1.3405,-0.61,3.11,1.3405,-1.89,5,1.3405,0.61,3.11,1.3405,1.89,3.11,1.3405,0.61,5,1.3405,3.11,3.11,1.3405,5,3.11,1.3405,3.11,-1.89,0,-1.89,-3.11,0,-3.11,-1.89,0,-3.11

@@ -26,7 +26,7 @@ export default class Menu extends BABYLON.Scene{
             this.bigBall.position.z = 0;
 
             this.bigBallMaterial = new BABYLON.StandardMaterial("ballMaterial", this);
-            this.bigBallMaterial.diffuseTexture = new BABYLON.Texture("images/Ball.jpg", this);
+            this.bigBallMaterial.diffuseTexture = new BABYLON.Texture("images/Common/Ball.jpg", this);
             this.bigBall.material = this.bigBallMaterial;
         }
         else{
@@ -58,9 +58,7 @@ export default class Menu extends BABYLON.Scene{
         this.rotateCamera.alpha = this.rotateCamera.alpha + 0.01 % (Math.PI);
 
     }
-
     explosion(){
-
         BABYLON.ParticleHelper.CreateAsync("explosion", this).then((set) => {
             set.systems.forEach(s => {
                 s.disposeOnStop = true;
@@ -80,7 +78,6 @@ export default class Menu extends BABYLON.Scene{
 
     }
 
-    // ne se dispose pas
     fallingBalls(){
         BABYLON.setAndStartTimer({
             timeout:5,
@@ -99,7 +96,6 @@ export default class Menu extends BABYLON.Scene{
             }
         });
     }
-
 
     createSphere(x,y,z, color){
         let sphere = BABYLON.MeshBuilder.CreateSphere( "sphere",
@@ -122,7 +118,6 @@ export default class Menu extends BABYLON.Scene{
                 mass: 1,
                 nativeOptions: {linearDamping: 0.35, angularDamping: 0.35}
             }, this);
-
         return sphere;
     }
 
@@ -148,8 +143,6 @@ export default class Menu extends BABYLON.Scene{
             GameState.GameState = GameState.OptionMenu;
             console.log("main to options");
         });
-
-
     }
 
     async createGuiLevelMenu(){
@@ -169,12 +162,12 @@ export default class Menu extends BABYLON.Scene{
         });
         this.advancedTexture.level1Button.onPointerUpObservable.add( function (){
             GameState.GameState = GameState.Level;
-            GameState.numLevel = 0;
+            GameState.numLevel = 1;
             console.log("level to 1");
         });
         this.advancedTexture.level2Button.onPointerUpObservable.add( function (){
             GameState.GameState = GameState.Level;
-            GameState.numLevel = 1;
+            GameState.numLevel = 2;
             console.log("level to 2");
         });
         this.advancedTexture.level3Button.onPointerUpObservable.add( function (){
@@ -183,13 +176,15 @@ export default class Menu extends BABYLON.Scene{
             console.log("level to 3");
         });
         this.advancedTexture.level4Button.onPointerUpObservable.add( function (){
-            GameState.GameState = GameState.Level;
-            GameState.numLevel = 4;
+            //GameState.GameState = GameState.Level;
+            //GameState.numLevel = 4;
+            alert("Bientôt disponible en précommande pour 40€ seulement, une affaire en or !\nSigné: Wyrunique Games");
             console.log("level to 4");
         });
         this.advancedTexture.level5Button.onPointerUpObservable.add( function (){
-            GameState.GameState = GameState.Level;
-            GameState.numLevel = 5;
+            //GameState.GameState = GameState.Level;
+            //GameState.numLevel = 5;
+            alert("Bientôt disponible en précommande pour 40€ seulement, une affaire en or !\n Signé: Wyrunique Games");
             console.log("level to 5");
         });
     }
@@ -197,7 +192,6 @@ export default class Menu extends BABYLON.Scene{
     async createGuiOptionMenu(){
     this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(name, true, this);
     let loadedGui = await this.advancedTexture.parseFromURLAsync("gui/guiTextureOptionMenu.json");
-
 
     this.advancedTexture.returnButton = this.advancedTexture.getControlByName("returnButton");
     this.advancedTexture.sliderMusicVolume = this.advancedTexture.getControlByName("sliderMusicVolume");

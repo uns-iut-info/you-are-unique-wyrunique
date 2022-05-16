@@ -1,4 +1,3 @@
-import Options from "./Options.js";
 
 export default class Player {
 
@@ -7,6 +6,8 @@ export default class Player {
         this.id = id;
         this.scene = scene;
         this.speed = 0.5;
+        this.linkedTriggers = [];
+        this.linkedMeshes = [];
 
         playerMesh.Player = this;
     }
@@ -39,9 +40,14 @@ export default class Player {
         for (let i=0; i < scene.players.length; i=i+1){
             if (i !== scene.currentPlayer){
                 if (scene.players[scene.currentPlayer].playerMesh.intersectsMesh(scene.players[i].playerMesh, true)){
-                    console.log("touch player: "+i);
+                    console.log("Merged part "+i);
                     let removedPlayer = scene.players.splice(i,1);
                     let removedCamera = scene.cameras.splice(i,1);
+                    for (let i = 0; i < removedPlayer[0].linkedMeshes.length; i++) {
+                        removedPlayer[0].linkedMeshes[i].actionManager.unregisterAction(removedPlayer[0].linkedTriggers[i]);
+                        removedPlayer[0].linkedTriggers.splice(i,1);
+                        removedPlayer[0].linkedMeshes.splice(i,1);
+                    }
                     removedPlayer[0].playerMesh.dispose();
                     removedCamera[0].dispose();
                     if (i < scene.currentPlayer){
@@ -58,12 +64,13 @@ export default class Player {
                     }
                     scene.mergeSound.play();
                     return true;
-
                 }
             }
         }
-
     }
 
+    jump(scene, inputStates){
+
+    }
 
 }
