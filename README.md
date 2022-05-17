@@ -2,7 +2,7 @@
 
 [Accéder au jeu](https://game-on-web.herokuapp.com/)
 
-[Vidéo de démonstration](/public/D%C3%A9mo%20jeu.mp4)
+[Vidéo de démonstration](https://youtu.be/jJTvgDMDUEA)
 
 > Jeu produit par les membres de l'équipe **Wyruniqe**
 
