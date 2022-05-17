@@ -7,7 +7,7 @@ export default class Level3 extends AbstractLevel{
 
     constructor(engine, canvas) {
         super(engine, canvas, 3);
-        this.endPosition = new BABYLON.Vector3(0,0,0);
+        this.endPosition = new BABYLON.Vector3(0,15,0);
         this.plateformMoving = false;
         this.movingDirection = BABYLON.Vector3.Zero();
     }
