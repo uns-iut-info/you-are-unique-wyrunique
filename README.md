@@ -1,6 +1,6 @@
 # Lost in Yourself
 
-[Accéder au jeu]()
+[Accéder au jeu](https://game-on-web.herokuapp.com/)
 
 [Vidéo de démonstration](/public/D%C3%A9mo%20jeu.mp4)
 
