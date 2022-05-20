@@ -122,9 +122,11 @@ Pour pouvoir jouer chez vous en local sur votre machine, il y a différentes ét
 
 > 5. Exécutez ensuite la commande ```npm start```
 
-> 6. Exécutez ensuite la commande ```node app.js```
+> 6. Dans votre navigateur, rendez vous à l'adresse ```http://localhost:3000/```
 
-> 7. Dans votre navigateur, rendez vous à l'adresse ```http://localhost:3000/```
+> 7. Si vous fermez votre terminal, ou simplement pour un futur lancement, la commande ```node app.js``` suffira.
+
+
 
 ## Déploiement
 
